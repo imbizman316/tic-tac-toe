@@ -2,7 +2,6 @@ let board = {   upper:[0,0,0],
                 middle:[0,0,0],
                 bottom:[0,0,0],
             };
-
 //I will first put 6 buttons.
 //Let me get all the buttons first.
 
@@ -51,7 +50,6 @@ playerButton.addEventListener('click',()=>{
 AIButton.addEventListener('click',()=>{
     window.setTimeout(AIplay,1000);
 })
-
 
 //This is for enemy move.
 function AIplay() {
@@ -103,40 +101,58 @@ function AIplay() {
 function checkWinner(){
     if (board.upper[0] === board.upper[1] &&
         board.upper[1] === board.upper[2]){
-            if (board.upper[0] === "O") {alert("YOU WON!")}
-            else if (board.upper[0] === "X") {alert("AI WON!")}
+            if (board.upper[0] === "O") {alert("YOU WON!"); reset();}
+            else if (board.upper[0] === "X") {alert("AI WON!"); reset();}
     } else if (board.middle[0] === board.middle[1] &&
         board.middle[1] === board.middle[2]){
-            if (board.middle[0] === "O") {alert("YOU WON!")}
-            else if (board.upper[0] === "X") {alert("AI WON!")}
+            if (board.middle[0] === "O") {alert("YOU WON!"); reset();}
+            else if (board.upper[0] === "X") {alert("AI WON!"); reset();}
     } else if (board.bottom[0] === board.bottom[1] &&
         board.bottom[1] === board.bottom[2]){
-            if (board.bottom[0] === "O") {alert("YOU WON!")}
-            else if (board.bottom[0] === "X") {alert("AI WON!")}
+            if (board.bottom[0] === "O") {alert("YOU WON!"); reset();}
+            else if (board.bottom[0] === "X") {alert("AI WON!"); reset();}
     } else if (board.upper[0] === board.middle[1] &&
         board.middle[1] === board.bottom[2]){
-            if (board.upper[0] === "O") {alert("YOU WON!")}
-            else if (board.upper[0] === "X") {alert("AI WON!")}
+            if (board.upper[0] === "O") {alert("YOU WON!"); reset();}
+            else if (board.upper[0] === "X") {alert("AI WON!"); reset();}
     } else if (board.bottom[0] === board.middle[1] &&
         board.middle[1] === board.upper[2]){
-            if (board.bottom[0] === "O") {alert("YOU WON!")}
-            else if (board.bottom[0] === "X") {alert("AI WON!")}
+            if (board.bottom[0] === "O") {alert("YOU WON!"); reset();}
+            else if (board.bottom[0] === "X") {alert("AI WON!"); reset();}
     } else if (board.upper[0] === board.middle[0] &&
         board.middle[0] === board.bottom[0]){
-            if (board.upper[0] === "O") {alert("YOU WON!")}
-            else if (board.upper[0] === "X") {alert("AI WON!")}
+            if (board.upper[0] === "O") {alert("YOU WON!"); reset();}
+            else if (board.upper[0] === "X") {alert("AI WON!"); reset();}
     } else if (board.upper[1] === board.middle[1] &&
         board.middle[1] === board.bottom[1]){
-            if (board.upper[1] === "O") {alert("YOU WON!")}
-            else if (board.upper[1] === "X") {alert("AI WON!")}
+            if (board.upper[1] === "O") {alert("YOU WON!"); reset();}
+            else if (board.upper[1] === "X") {alert("AI WON!"); reset();}
     } else if (board.upper[2] === board.middle[2] &&
         board.middle[2] === board.bottom[2]){
-            if (board.upper[2] === "O") {alert("YOU WON!")}
-            else if (board.upper[2] === "X") {alert("AI WON!")}
+            if (board.upper[2] === "O") {alert("YOU WON!"); reset();}
+            else if (board.upper[2] === "X") {alert("AI WON!"); reset();}
     }
 }
 
 //This is where I reset everything if the game ends.
 function reset() {
+    //first I need to reset the board.
+    board = {upper:[0,0,0],
+             middle:[0,0,0],
+             bottom:[0,0,0],
+    };
 
+    //const upperBoard = document.querySelector('.upper-board').children;
+
+    for (let i=0; i < upperBoard.length; i++){
+        upperBoard[i].textContent = '';
+    }
+    
+    for (let i=0; i < middleBoard.length; i++){
+        middleBoard[i].textContent = '';
+    }
+
+    for (let i=0; i < bottomBoard.length; i++){
+        bottomBoard[i].textContent = '';
+    }
 }
