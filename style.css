@@ -1,6 +1,6 @@
-button {
-    height: 100px;
-    width: 100px;
+.upper-board button, .middle-board button, .bottom-board button{
+    height: 120px;
+    width: 120px;
     font-size: 70px;
     text-align: center;
 }
