@@ -2,18 +2,30 @@ let board = {   upper:[0,0,0],
                 middle:[0,0,0],
                 bottom:[0,0,0],
             };
+
+let playerName = "";
+let playTurn = "";
 //I will first put 6 buttons.
 //Let me get all the buttons first.
 
 //This is for the upper row
+
+const head = document.querySelector('.head');
+const selectbutton = document.querySelector('.selectbutton');
+const main = document.querySelector('.main');
+
 const upperBoard = document.querySelector('.upper-board').children;
 
 for (let i=0; i < upperBoard.length; i++){
     upperBoard[i].addEventListener('click',(e)=>{
-        board.upper[i] = "O";
-        e.target.textContent = board.upper[i];
-        checkWinner();
-        window.setTimeout(AIplay,1000);
+        if (playTurn === 'player') {
+            board.upper[i] = "O";
+            e.target.textContent = board.upper[i];
+            checkWinner();
+            playTurn = 'ai';
+            window.setTimeout(AIplay,1000);
+            alert("mmm....");
+        }
     })
 }
 
@@ -22,10 +34,14 @@ const middleBoard = document.querySelector('.middle-board').children;
 
 for (let i=0; i < middleBoard.length; i++){
     middleBoard[i].addEventListener('click',(e)=>{
-        board.middle[i] = "O";
-        e.target.textContent = board.middle[i];
-        checkWinner();
-        window.setTimeout(AIplay,1000);
+        if (playTurn === 'player') {
+            board.middle[i] = "O";
+            e.target.textContent = board.middle[i];
+            checkWinner();
+            playTurn = 'ai';
+            window.setTimeout(AIplay,1000);
+            alert("mmm....");
+        }        
     })
 }
 
@@ -34,10 +50,14 @@ const bottomBoard = document.querySelector('.bottom-board').children;
 
 for (let i=0; i < bottomBoard.length; i++){
     bottomBoard[i].addEventListener('click',(e)=>{
-        board.bottom[i] = "O";
-        e.target.textContent = board.bottom[i];
-        checkWinner();
-        window.setTimeout(AIplay,1000);
+        if (playTurn === 'player') {
+            board.bottom[i] = "O";
+            e.target.textContent = board.bottom[i];
+            checkWinner();
+            playTurn = 'ai';
+            window.setTimeout(AIplay,1000);
+            alert("mmm....");
+        }        
     })
 }
 
@@ -45,9 +65,14 @@ for (let i=0; i < bottomBoard.length; i++){
 const playerButton = document.querySelector('.playerButton');
 const AIButton = document.querySelector('.AIButton');
 playerButton.addEventListener('click',()=>{
-    alert("YOO");
+    playTurn = 'player';
+    main.style.display = 'initial';
+    selectbutton.style.display = 'none';
 });
 AIButton.addEventListener('click',()=>{
+    playTurn = 'ai';
+    main.style.display = 'initial';
+    selectbutton.style.display = 'none';
     window.setTimeout(AIplay,1000);
 })
 
@@ -96,6 +121,7 @@ function AIplay() {
     choices.splice(index,1);
     
     checkWinner();
+    playTurn = 'player';
 }
 
 function checkWinner(){
@@ -137,6 +163,8 @@ function checkWinner(){
 //This is where I reset everything if the game ends.
 function reset() {
     //first I need to reset the board.
+    startGame();
+
     board = {upper:[0,0,0],
              middle:[0,0,0],
              bottom:[0,0,0],
@@ -155,4 +183,55 @@ function reset() {
     for (let i=0; i < bottomBoard.length; i++){
         bottomBoard[i].textContent = '';
     }
+    main.style.display = 'none';
 }
+
+function startGame() {
+    
+    const startButton = document.createElement('p');
+    startButton.textContent = 'Click to play';
+    startButton.className = 'fadein';
+    head.appendChild(startButton);
+    let invervaltime = 700;
+
+    setInterval(function() {
+        if (startButton.className === 'fadein') {
+            startButton.className = 'fadeout';
+        } else if (startButton.className === 'fadeout') {
+            startButton.className = 'fadein';
+        } else if (startButton.className === 'fadeinFast') {
+            startButton.className = 'fadeoutFast';
+        } else if (startButton.className === 'fadeoutFast') {
+            startButton.className = 'fadeinFast';
+        }
+    }, invervaltime)
+
+    startButton.addEventListener('click',(e)=>{
+        e.target.className = 'fadeinFast';
+        invervaltime = 1;
+        askName();
+    });
+}
+
+function askName() {
+    head.removeChild(head.children[2]);
+    const label = document.createElement('label');
+    label.textContent = "Enter name";
+    const getNameField = document.createElement('input');
+    head.appendChild(label);
+    head.appendChild(getNameField);
+
+    getNameField.addEventListener('keypress',(e)=>{
+        if (e.key === 'Enter') {
+            playerName = e.target.value;
+            const askplayer = document.querySelector('.askplayer');
+            askplayer.textContent = `Hello ${playerName}, who goes first?`;
+            head.removeChild(label);
+            head.removeChild(getNameField);
+            selectbutton.style.display = 'initial';
+        }
+    })
+}
+
+startGame();
+

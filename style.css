@@ -4,3 +4,49 @@
     font-size: 70px;
     text-align: center;
 }
+
+.selectbutton {
+    display: none;
+}
+
+.main {
+    display: none;
+}
+
+.fadein {
+    font-family: Arial;
+    font-size: 10px;
+    font-size: 30px;
+    animation: fadeIn 0.7s;
+}
+
+.fadeout {
+    font-family: Arial;
+    font-size: 10px;
+    font-size: 30px;
+    animation: fadeOut 0.7s;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes fadeOut {
+    100% {opacity: 0;}
+    0% {opacity: 1;} 
+}
+
+.fadeinFast {
+    font-family: Arial;
+    font-size: 10px;
+    font-size: 30px;
+    animation: fadeIn 0.001s;
+}
+
+.fadeoutFast {
+    font-family: Arial;
+    font-size: 10px;
+    font-size: 30px;
+    animation: fadeOut 0.001s;
+}
